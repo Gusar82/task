@@ -94,6 +94,18 @@ class Reviewer(Mentor):
             return 'Ошибка'
 
 
+def middle_grade(persons, course):
+    """Для подсчета средней оценки за лекции/домашние задания"""
+    sum_element = 0
+    amount_element = 0
+    for person in persons:
+        if course in person.grades:
+            sum_element += sum(person.grades[course])
+            amount_element += len(person.grades[course])
+    if amount_element != 0:
+        return round(sum_element/amount_element, 2)
+
+
 best_student = Student('Best', 'Student', 'male')
 best_student.courses_in_progress += ['Python']
 best_student.courses_in_progress += ['Git']
@@ -141,6 +153,9 @@ print("----------------------")
 print(f"Best < Worst - {best_student < worst_student}")
 print(f"Best > Worst - {best_student > worst_student}")
 print(f"Best = Worst - {best_student == worst_student}")
+print(f"Средняя оценка по курсу Git - {middle_grade([best_student,worst_student],'Git')}")
+print(f"Средняя оценка по курсу Python - {middle_grade([best_student,worst_student],'Python')}")
+print(f"Средняя оценка по курсу Введение - {middle_grade([best_student,worst_student],'Введение')}")
 print("-----------------------")
 print(cool_lecturer)
 print(cool_lecturer.grades)
@@ -152,6 +167,8 @@ print(f"Cool < Ineff - {cool_lecturer < ineffectual_lecturer}")
 print(f"Cool > Ineff - {cool_lecturer > ineffectual_lecturer}")
 print(f"Cool = Ineff - {cool_lecturer == ineffectual_lecturer}")
 print(f"Cool < Worst - {cool_lecturer < worst_student}")  # None
+print(f"Средняя оценка по курсу Git - {middle_grade([cool_lecturer,ineffectual_lecturer],'Git')}")
+print(f"Средняя оценка по курсу Python - {middle_grade([cool_lecturer,ineffectual_lecturer],'Python')}")
 print("''''''''''''''''''''''")
 print(cool_reviewer)
 print('----------------------')
